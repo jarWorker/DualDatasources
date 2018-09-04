@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.startsi.hnhousehold.model.Ysxt_fjxx" table="YSXT_FJXX">
+       
+        <id name="xlh" type="java.lang.Integer">
+            <column name="XLH" length="18" />
+            <generator class="assigned" />
+        </id>
+        <property name="zt" type="java.lang.String">
+            <column name="ZT" length="10" />
+        </property>
+     
+        <property name="fjlx" type="java.lang.String">
+            <column name="FJLX" length="2"/><!-- 这长度两位不科学 -->
+        </property>
+         <property name="cjsj" type="java.lang.String">
+            <column name="CJSJ" length="20" />
+        </property>
+         <property name="fjmc" type="java.lang.String">
+            <column name="FJMC" length="500" />
+        </property>
+        <property name="fk_ywjzb_id" type="java.lang.String">
+            <column name="FK_YWJZB_ID" length="16" />
+        </property>
+        <property name="fk_ywzjb_zb_id" type="java.lang.String">
+            <column name="FK_YWZJB_ZB_ID" length="16"/>
+        </property>
+        <property name="contents" >
+            <column name="CONTENTS"/>
+        </property>
+        <property name="fjbm" type="java.lang.String">
+            <column name="FJBM" length="50"/>
+        </property>
+        <property name="bz" type="java.lang.String">
+            <column name="BZ" length="500"/>
+        </property>
+        
+         <property name="isread" type="java.lang.String">
+            <column name="ISREAD" length="2"/>
+        </property>
+    </class>
+</hibernate-mapping>

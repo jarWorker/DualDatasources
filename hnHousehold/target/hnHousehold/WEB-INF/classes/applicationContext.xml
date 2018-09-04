@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/tx
+          http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/aop
+          http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+          http://www.springframework.org/schema/task 
+          http://www.springframework.org/schema/task/spring-task-3.0.xsd
+          http://www.springframework.org/schema/mvc  
+          http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config></context:annotation-config>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<context:component-scan base-package="com.startsi.hnhousehold">
+		<context:exclude-filter type="regex"
+			expression="com.startsi.*.start.*" />
+	</context:component-scan>
+
+	<!-- 用Bean定义数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@202.100.246.102 
+			192.168.5.108 172.168.110.5 192.168.50.130:1521:orcl"></property> <property 
+			name="user" value="hn"></property> <property name="password" value="hn"></property> -->
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.5.108:1521:orcl"></property> -->
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@202.100.246.102:1521:orcl"></property> -->
+		<!--<property name="jdbcUrl" value="jdbc:oracle:thin:@202.100.246.102:1521:orcl"></property>-->
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl"></property> 
+		<property name="user" value="hnapply"></property>
+		<property name="password" value="star"></property>
+
+		<!-- 最大连接数 -->
+		<property name="maxPoolSize" value="5"></property>
+		<!-- 最小连接数 -->
+		<property name="minPoolSize" value="3"></property>
+		<!-- 初始连接数 -->
+		<property name="initialPoolSize" value="3"></property>
+		<!-- 空闲时间 -->
+		<property name="maxIdleTime" value="60"></property>
+		<!-- 全局缓存大小 -->
+		<property name="maxStatements" value="20"></property>
+	</bean>
+	<!-- mysql数据源 -->
+	<bean id="remotePosDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/hnhousehold?useUnicode=true&amp;characterEncoding=UTF-8
+			</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+	</bean>
+	<bean id="sessionFactory1"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="remotePosDataSource" />
+		<property name="packagesToScan" value="com.startsi.*.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.Oracle10gDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					true
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">
+					update
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<!-- 户政业务 -->
+				<value>com/startsi/hnhousehold/model/Fjxx.hbm.xml</value>
+				<value>com/startsi/hnhousehold/model/Ywjzb.hbm.xml</value>
+				<value>com/startsi/hnhousehold/model/Ywjzb_zb.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!--定义Hibernate的SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.startsi.*.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.Oracle10gDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					true
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">
+					update
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<!-- 户政业务 -->
+				<value>com/startsi/hnhousehold/model/Ysxt_fjxx.hbm.xml</value>
+				<value>com/startsi/hnhousehold/model/Ysxt_ywjzb.hbm.xml</value>
+				<value>com/startsi/hnhousehold/model/Ysxt_ywjzb_zb.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="txManager1"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory1"></property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+	<tx:annotation-driven transaction-manager="txManager1" />
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(* com.startsi.hnhousehold.service.impl.*.*(..))"
+			advice-ref="txAdvice1" />
+	</aop:config>
+	<tx:advice id="txAdvice1" transaction-manager="txManager1">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+<!-- 定时器 -->
+<bean id="fistJob"  class="com.startsi.hnhousehold.start.HZStartThread"/>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"  autowire="no" >
+		
+		<property name="autoStartup">
+			<value>true</value> 
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerBean" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean  id="jobDetailBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="fistJob"></property>     
+		<property name="targetMethod" value="hzThread1"></property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean  id="cronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+		<property name="jobDetail">
+			<ref bean="jobDetailBean" />
+		</property>
+		<property name="cronExpression">
+			<!-- <value>0/5 * * * * ?</value> -->
+			<value>*/10 * * * * ?</value>
+		</property>
+	</bean> 
+	
+	
+
+
+	<tx:annotation-driven transaction-manager="txManager" />
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(* com.startsi.hnhousehold.service.impl.*.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="hibernateTemplate1" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory1"></property>
+	</bean>
+</beans>

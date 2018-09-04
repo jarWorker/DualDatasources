@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.startsi.hnhousehold.model.Ysxt_ywjzb_zb" table="YSXT_YWJZB_ZB">
+       
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="16" />
+            <generator class="assigned" />
+        </id>
+        <property name="zbid" type="java.lang.String">
+            <column name="ZBID" length="16" not-null="true"/>
+        </property>
+        <property name="gmsfhm" type="java.lang.String">
+            <column name="GMSFHM" length="120" />
+        </property>
+        <property name="xm" type="java.lang.String">
+            <column name="XM" length="120" />
+        </property>
+        <property name="xb" type="java.lang.String">
+            <column name="XB" length="10" />
+        </property>
+        <property name="mz" type="java.lang.String">
+            <column name="MZ" length="10" />
+        </property>
+        <property name="csrq" type="java.lang.String">
+            <column name="CSRQ" length="8" />
+        </property>
+        <property name="whcd" type="java.lang.String">
+            <column name="WHCD" length="2" />
+        </property>
+        <property name="hyzk" type="java.lang.String">
+            <column name="HYZK" length="2" />
+        </property>
+        
+         <property name="jggj" type="java.lang.String">
+            <column name="JGGJ" length="3" />
+        </property>
+        <property name="jgssx" type="java.lang.String">
+            <column name="JGSSX" length="200" />
+        </property>
+        <property name="jgxz" type="java.lang.String">
+            <column name="JGXZ" length="200" />
+        </property>
+        
+        <property name="fqhm" type="java.lang.String">
+            <column name="FQHM" length="18" />
+        </property>
+         <property name="fqxm" type="java.lang.String">
+            <column name="FQXM" length="60" />
+        </property>
+        <property name="mqhm" type="java.lang.String">
+            <column name="MQHM" length="18" />
+        </property>
+        <property name="mqxm" type="java.lang.String">
+            <column name="MQXM" length="60" />
+        </property>
+        
+        <property name="csdgj" type="java.lang.String">
+            <column name="CSDGJ" length="3" />
+        </property>
+         <property name="csdssx" type="java.lang.String">
+            <column name="CSDSSX" length="6" />
+        </property>
+        <property name="csdxz" type="java.lang.String">
+            <column name="CSDXZ" length="200" />
+        </property>
+        <property name="cszmbh" type="java.lang.String">
+            <column name="CSZMBH" length="20" />
+        </property>
+        
+         <property name="hylbd" type="java.lang.String">
+            <column name="HYLBD" length="3" />
+        </property>
+        <property name="hdlbsssxq" type="java.lang.String">
+            <column name="HDLBSSSXQ" length="6" />
+        </property>
+        <property name="hdlbsxz" type="java.lang.String">
+            <column name="HDLBSXZ" length="200" />
+        </property>
+        
+        <property name="qyssxq" type="java.lang.String">
+            <column name="QYSSXQ" length="6" />
+        </property>
+        <property name="qyxz" type="java.lang.String">
+            <column name="QYXZ" length="200" />
+        </property>
+        <property name="qypcsdm" type="java.lang.String">
+            <column name="QYPCSDM" length="12" />
+        </property>
+        
+        <property name="zqzbh" type="java.lang.String">
+            <column name="ZQZBH" length="10" />
+        </property>
+        
+        <property name="qczxlb" type="java.lang.String">
+            <column name="QCZXLB" length="3" />
+        </property>
+        <property name="qwdssx" type="java.lang.String">
+            <column name="QWDSSX" length="6" />
+        </property>
+        <property name="qwdxz" type="java.lang.String">
+            <column name="QWDXZ" length="200" />
+        </property>
+        <property name="lxdh" type="java.lang.String">
+            <column name="LXDH" length="60" />
+        </property>
+        
+        <property name="swrq" type="java.lang.String">
+            <column name="SWRQ" length="8" />
+        </property>
+        <property name="swzxrq" type="java.lang.String">
+            <column name="SWZXRQ" length="8" />
+        </property>
+        <property name="swzxlb" type="java.lang.String">
+            <column name="SWZXLB" length="4" />
+        </property>
+        
+        <property name="bggzxmbh" type="java.lang.String">
+            <column name="BGGZXMBH" length="7" />
+        </property>
+        <property name="bggzhmmc" type="java.lang.String">
+            <column name="BGGZHMMC" length="120" />
+        </property>
+        <property name="bggzqnr" type="java.lang.String">
+            <column name="BGGZQNR" length="200" />
+        </property>
+        <property name="bggzhnr" type="java.lang.String">
+            <column name="BGGZHNR" length="200" />
+        </property>
+        
+        <property name="js" type="java.lang.String">
+            <column name="JS" length="500" />
+        </property>
+         <property name="yhzgx" type="java.lang.String">
+            <column name="YHZGX" length="8" />
+        </property>
+        <property name="gzdw" type="java.lang.String">
+            <column name="GZDW" length="100" />
+        </property>
+        <property name="fqmz" type="java.lang.String">
+            <column name="FQMZ" length="2" />
+        </property>
+        <property name="mqmz" type="java.lang.String">
+            <column name="MQMZ" length="2" />
+        </property>
+        
+        <property name="xsrtc" type="java.lang.String">
+            <column name="XSRTC" length="50" />
+        </property>
+         <property name="ysbrgx" type="java.lang.String">
+            <column name="YSBRGX" length="2" />
+        </property>
+        <property name="hkdjd" type="java.lang.String">
+            <column name="HKDJD" length="500" />
+        </property>
+        <property name="ztbdjg" type="java.lang.String">
+            <column name="ZTBDJG" length="2" />
+        </property>
+        <property name="czhbdjg" type="java.lang.String">
+            <column name="CZHBDJG" length="2" />
+        </property>
+         <property name="bdsj" type="java.lang.String">
+            <column name="BDSJ" length="14" />
+        </property>
+        
+    </class>
+</hibernate-mapping>
