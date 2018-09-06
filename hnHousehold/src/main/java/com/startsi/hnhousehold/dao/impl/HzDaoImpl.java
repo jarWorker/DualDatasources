@@ -25,4 +25,5 @@ public class HzDaoImpl extends BaseDaoImpl implements HzDao {
 		System.out.println("criteria===="+criteria.list());*/
 		
 			return criteria.list().size()==0?null:criteria.list();
+ }
 }
